@@ -7,3 +7,45 @@ require argument - file path (absolute or relative)
 	.js in file name can be ignored
 
 every module have access to some local variaoble this, module, exports, __dirname, __filename
+
+__proto__  -  property which refers to prototype of every object in v8
+Prototypes in Javascript
+>>start<<
+var Person = function(name){
+  this.name = name;
+}
+Person.prototype.greet = function(){
+	console.log("Hello..", this.name);
+}
+var suresh = new Person("Suresh");
+var sadhana = new Person("Sadhana");
+suresh.greet();	//	Hello.. Suresh
+sadhana.greet();	//Hello.. Sadhana
+console.log(suresh.__proto__ === sadhana.__proto__);	//	true
+>>end<<
+
+Classical Inheritance in Javascript
+>>start<<
+var Phone = function(number){
+	this.number = number;
+}
+Phone.prototype.makeCall = function(){
+	console.log("Making a call from # : ", this.number);
+}
+var SmartPhone = function(number){
+	Phone.apply(this, arguments);
+}
+SmartPhone.prototype = new Phone();
+SmartPhone.prototype.constructor = SmartPhone;
+SmartPhone.prototype.sendMMS = function(){
+	console.log('Sending MMS from # :  ', this.number);
+}
+var phone = new Phone(123);
+var smartPhone = new SmartPhone(456);
+var anotherSmartPhone = new SmartPhone(789);
+phone.makeCall();
+smartPhone.makeCall();
+smartPhone.sendMMS();
+anotherSmartPhone.makeCall();
+anotherSmartPhone.sendMMS();
+>>end<<
