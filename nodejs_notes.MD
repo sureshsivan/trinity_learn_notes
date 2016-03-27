@@ -77,5 +77,15 @@ function(exports, require, module, __dirname, __filename){
 ```
 * execute the above function through "apply"
 * returns module.exports
-* __rEVEALING MODULE PATTERN__ is revealing only the few properties/functions from module.exports - achieved through returning an object with limited properties	
-	
+* __REVEALING MODULE PATTERN__ is revealing only the few properties/functions from module.exports - achieved through returning an object with limited properties	
+* Use module.exports instead of assigning something to exports. mutation exports work but asgning a new object to exports does not work
+```javascript
+// its a javascript quirk
+export = function(){
+	console.log("test");
+}
+console.log(exports === module.exports);	//	false
+
+export.test = "test";
+console.log(exports === module.exports);	//	true 
+```
