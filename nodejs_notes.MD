@@ -122,3 +122,49 @@ console.log(exports === module.exports);	//	true
 * Systems events(file read, file open and more - from C++, libuv),  Custom Events - as part of javascrpt code (Event Emitter)
 * __MAgic Strings__ - using hard coded strings for event names - use externalized string constants for event names
 * Object.create(null) - object creation without prototype = Object.create({}) - create object with prototype
+## Event Emitter example 1
+```javascript
+var EventEmitter = require("events");
+var util = require("util");
+function MyConstructor(){
+	// blah blah blah
+}
+util.inherits(MyCOnstructor, EventEmitter);
+
+var obj = new MyConstructor();
+// obj.on, obj.emit - works
+
+```
+
+# Node and ES6
+* use node --harmony <js file> - to run in es6 mode
+```javascript
+// file greet.js
+export function greet(){
+    console.log("Greeting from ES6");
+}
+export function greet1(){
+    console.log("Greeting 1 from ES6");
+}
+// file index.ja
+import * as greeter from "greet"
+greeter.greet();
+greeter.greet1();
+```
+* babel.js  - shim for ES6 (ES 2015) - only for browser
+## server side nodejs support can be achieved through __jsconfig.json__ file
+```json
+{
+    "compilerOptions": {
+        "target": "ES6"
+    }
+}
+```
+## Template Literal
+```javascript
+var name = "suresh";
+var greetOlder = "Hello : " + name;
+var greetEs6 = `Hello : ${name}`;	//	can be multi line
+console.log(greetOlder);
+console.log(greetEs6);
+```
