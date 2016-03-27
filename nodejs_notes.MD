@@ -60,7 +60,7 @@ var summa = function(){
 	console.log("Summa");
 }
 ```
-	3. translated to 
+* translated to 
 ```javascript
 function(exports, require, module, __dirname, __filename){
 	var summa = function(){
@@ -68,7 +68,7 @@ function(exports, require, module, __dirname, __filename){
 	}
 });
 ```
-	4.	execute the above function through "apply"
-	5. returns module.exports
+* execute the above function through "apply"
+* returns module.exports
 	
 	
