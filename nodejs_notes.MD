@@ -1,16 +1,17 @@
-nodejs << v8-javascript engine << written in C++
-io.js is community  - more frequesnt updates based on v8 releases.
-nodejs 4.x.x is merge of io.js 3.x + nodejs 0.12
+* nodejs << v8-javascript engine << written in C++
+* io.js is community  - more frequesnt updates based on v8 releases.
+* nodejs 4.x.x is merge of io.js 3.x + nodejs 0.12
 
-CommonJS  - standards for javascript module system
-require argument - file path (absolute or relative)
-	.js in file name can be ignored
+* CommonJS  - standards for javascript module system
+* require argument - file path (absolute or relative)
+	* .js in file name can be ignored
 
-every module have access to some local variaoble this, module, exports, __dirname, __filename
+* every module have access to some local variaoble this, module, exports, __dirname, __filename
 
-__proto__  -  property which refers to prototype of every object in v8
-Prototypes in Javascript
->>start<<
+* __proto__  -  property which refers to prototype of every object in v8
+
+# Prototypes in Javascript
+```javascript
 var Person = function(name){
   this.name = name;
 }
@@ -22,10 +23,10 @@ var sadhana = new Person("Sadhana");
 suresh.greet();	//	Hello.. Suresh
 sadhana.greet();	//Hello.. Sadhana
 console.log(suresh.__proto__ === sadhana.__proto__);	//	true
->>end<<
+```
 
-Classical Inheritance in Javascript
->>start<<
+# Classical Inheritance in Javascript
+```javascript
 var Phone = function(number){
 	this.number = number;
 }
@@ -48,4 +49,4 @@ smartPhone.makeCall();
 smartPhone.sendMMS();
 anotherSmartPhone.makeCall();
 anotherSmartPhone.sendMMS();
->>end<<
+```
