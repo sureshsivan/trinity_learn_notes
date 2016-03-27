@@ -118,24 +118,6 @@ console.log(exports === module.exports);	//	true
 ```
 * If a util named as same as core library (util for ex) - make  sure to use the relative path in require
 
-# Events
-* Systems events(file read, file open and more - from C++, libuv),  Custom Events - as part of javascrpt code (Event Emitter)
-* __MAgic Strings__ - using hard coded strings for event names - use externalized string constants for event names
-* Object.create(null) - object creation without prototype = Object.create({}) - create object with prototype
-## Event Emitter example 1
-```javascript
-var EventEmitter = require("events");
-var util = require("util");
-function MyConstructor(){
-	// blah blah blah
-}
-util.inherits(MyCOnstructor, EventEmitter);
-
-var obj = new MyConstructor();
-// obj.on, obj.emit - works
-
-```
-
 # Node and ES6
 * use node --harmony <js file> - to run in es6 mode
 ```javascript
@@ -167,4 +149,80 @@ var greetOlder = "Hello : " + name;
 var greetEs6 = `Hello : ${name}`;	//	can be multi line
 console.log(greetOlder);
 console.log(greetEs6);
+```
+## ES6 classes
+```javascript
+'use strict';
+module.exports = class Person {
+	constructor(firstname, lastname) {
+		this.firstname = firstname;
+		this.lastname = lastname;
+	}
+	
+	greet() {
+		console.log('Hello, ' + this.firstname + ' ' + this.lastname);
+	}
+}
+
+var john = new Person('John', 'Doe');
+john.greet();
+
+var jane = new Person('Jane', 'Doe');
+jane.greet();
+
+console.log(john.__proto__);
+console.log(jane.__proto__);
+console.log(john.__proto__ === jane.__proto__);
+```
+
+
+## this on literals - always refers to the enclosing object literal - __call__ and __apply__ methods
+```javascript
+var xx = {
+  name: "outer",
+  outerPrint: function(){
+    console.log("Outer Print : ", this.name);
+	//console.log(this);
+  },
+  inner: {
+    name: "Inner",
+    innerPrint: function(){
+      console.log("Inner Print : ", this.name);
+    }
+  }
+};
+xx.outerPrint();	//	outer
+xx.inner.innerPrint();	//	inner
+
+xx.outerPrint.call();	//	prints nothing	-	this refers to global here
+xx.outerPrint.call({name: "External"});	// External
+xx.inner.innerPrint.call();	//	prints nothing	-	this refers to global here 
+xx.inner.innerPrint.call({name: "External for Inner call"});	// External for Inner call
+
+xx.outerPrint.apply();	//	prints nothing	-	this refers to global here
+xx.outerPrint.apply({name: "External"});	// External
+xx.inner.innerPrint.apply();	//	prints nothing	-	this refers to global here 
+xx.inner.innerPrint.apply({name: "External for Inner call"});	// External for Inner call
+
+```
+* apply expects arguments to passed as array - like XX.apply({}, [arg1, arg2, arg3...])
+* call expects arguments to passed as additional arguments - like XX.call({}, arg1, arg2, arg3...)
+
+# Events and EventEmitter
+* Systems events(file read, file open and more - from C++, libuv),  Custom Events - as part of javascrpt code (Event Emitter)
+* __MAgic Strings__ - using hard coded strings for event names - use externalized string constants for event names
+* Object.create(null) - object creation without prototype = Object.create({}) - create object with prototype
+## Event Emitter example 1
+```javascript
+var EventEmitter = require("events");
+var util = require("util");
+function MyConstructor(){
+	EventEmitter.call(this);	//	to make sure properties added by EventEmitter to this object available for my object as well
+	// blah blah blah
+}
+util.inherits(MyCOnstructor, EventEmitter);
+
+var obj = new MyConstructor();
+// obj.on, obj.emit - works
+
 ```
