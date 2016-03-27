@@ -6,7 +6,7 @@
 * require argument - file path (absolute or relative)
 	* .js in file name can be ignored
 
-* every module have access to some local variaoble this, module, exports, \_\_dirname, \_\_filename
+* every module have access to some local variaoble this, require, module, exports, \_\_dirname, \_\_filename
 
 * \_\_proto\_\_  -  property which refers to prototype of every object in v8
 
@@ -50,3 +50,25 @@ smartPhone.sendMMS();
 anotherSmartPhone.makeCall();
 anotherSmartPhone.sendMMS();
 ```
+
+* SCOPE - wher in code we have access to particular object (function or object or any var)
+* require function does below
+	1. reads our file and wraps it a immediately invoking function
+	2. execute it and return the module.export object where module is one of the argument to the generated wrapper function.
+```javascript
+var summa = function(){
+	console.log("Summa");
+}
+```
+	3. translated to 
+```javascript
+function(exports, require, module, __dirname, __filename){
+	var summa = function(){
+		console.log("Summa");
+	}
+});
+```
+	4.	execute the above function through "apply"
+	5. returns module.exports
+	
+	
