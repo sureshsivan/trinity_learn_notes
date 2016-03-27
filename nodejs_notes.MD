@@ -52,6 +52,9 @@ anotherSmartPhone.sendMMS();
 ```
 
 * SCOPE - wher in code we have access to particular object (function or object or any var)
+
+# require - module - exports 
+
 * require function does below
 	1. reads our file and wraps it a immediately invoking function
 	2. execute it and return the module.export object where module is one of the argument to the generated wrapper function.
