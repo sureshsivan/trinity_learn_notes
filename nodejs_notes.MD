@@ -89,3 +89,7 @@ console.log(exports === module.exports);	//	false
 export.test = "test";
 console.log(exports === module.exports);	//	true 
 ```
+* If a util named as same as core library (util for ex) - make  sure to use the relative path in require
+
+# Events
+* Systems events(file read, file open and more - from C++, libuv),  Custom Events - as part of javascrpt code (Event Emitter)
