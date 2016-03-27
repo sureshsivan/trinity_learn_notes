@@ -36,8 +36,10 @@ Phone.prototype.makeCall = function(){
 var SmartPhone = function(number){
 	Phone.apply(this, arguments);
 }
+
 SmartPhone.prototype = new Phone();
 SmartPhone.prototype.constructor = SmartPhone;
+
 SmartPhone.prototype.sendMMS = function(){
 	console.log('Sending MMS from # :  ', this.number);
 }
@@ -50,7 +52,32 @@ smartPhone.sendMMS();
 anotherSmartPhone.makeCall();
 anotherSmartPhone.sendMMS();
 ```
+# extending javascript object another way - similar util.inherits
+```javascript
+var Phone = function(number){
+	this.number = number;
+}
+Phone.prototype.makeCall = function(){
+	console.log("Making a call from # : ", this.number);
+}
+var SmartPhone = function(number){
+	Phone.apply(this, arguments);
+}
 
+SmartPhone.prototype = Object.create(Phone.prototype, {constructor: {value: SmartPhone}});
+
+SmartPhone.prototype.sendMMS = function(){
+	console.log('Sending MMS from # :  ', this.number);
+}
+var phone = new Phone(123);
+var smartPhone = new SmartPhone(456);
+var anotherSmartPhone = new SmartPhone(789);
+phone.makeCall();
+smartPhone.makeCall();
+smartPhone.sendMMS();
+anotherSmartPhone.makeCall();
+anotherSmartPhone.sendMMS();
+```
 * SCOPE - wher in code we have access to particular object (function or object or any var)
 
 # require - module - exports 
@@ -93,3 +120,5 @@ console.log(exports === module.exports);	//	true
 
 # Events
 * Systems events(file read, file open and more - from C++, libuv),  Custom Events - as part of javascrpt code (Event Emitter)
+* __MAgic Strings__ - using hard coded strings for event names - use externalized string constants for event names
+* Object.create(null) - object creation without prototype = Object.create({}) - create object with prototype
