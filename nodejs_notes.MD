@@ -54,8 +54,12 @@ anotherSmartPhone.sendMMS();
 * SCOPE - wher in code we have access to particular object (function or object or any var)
 
 # require - module - exports 
-
-* require function does below
+* no need to put .js - file extension
+* require('./greet') does below things
+	1. find and load "./greet.js" file
+	2. if above not found - fin "./greet" folder and load "index.js" file under that folder
+	3. If not found throw error.
+* require function does below (for js file)
 	1. reads our file and wraps it a immediately invoking function
 	2. execute it and return the module.export object where module is one of the argument to the generated wrapper function.
 ```javascript
@@ -73,5 +77,5 @@ function(exports, require, module, __dirname, __filename){
 ```
 * execute the above function through "apply"
 * returns module.exports
-	
+* __rEVEALING MODULE PATTERN__ is revealing only the few properties/functions from module.exports - achieved through returning an object with limited properties	
 	
