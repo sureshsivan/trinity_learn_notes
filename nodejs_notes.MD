@@ -6,9 +6,9 @@
 * require argument - file path (absolute or relative)
 	* .js in file name can be ignored
 
-* every module have access to some local variaoble this, module, exports, __dirname, __filename
+* every module have access to some local variaoble this, module, exports, \_\_dirname, \_\_filename
 
-* __proto__  -  property which refers to prototype of every object in v8
+* \_\_proto\_\_  -  property which refers to prototype of every object in v8
 
 # Prototypes in Javascript
 ```javascript
