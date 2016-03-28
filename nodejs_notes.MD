@@ -1,4 +1,7 @@
 * nodejs << v8-javascript engine << written in C++
+* javascript is synchronous - only one line of code can run @ any time - single threaded
+* v8 - also single threaded
+* node js is asynchronous - multi threaded - libuv helps to achieve that. libuv is the EventLoop implementation of nodejs
 * io.js is community  - more frequesnt updates based on v8 releases.
 * nodejs 4.x.x is merge of io.js 3.x + nodejs 0.12
 
@@ -174,7 +177,7 @@ console.log(john.__proto__);
 console.log(jane.__proto__);
 console.log(john.__proto__ === jane.__proto__);
 ```
-
+## ES6 typed arrays
 
 ## this on literals - always refers to the enclosing object literal - __call__ and __apply__ methods
 ```javascript
@@ -224,5 +227,47 @@ util.inherits(MyCOnstructor, EventEmitter);
 
 var obj = new MyConstructor();
 // obj.on, obj.emit - works
+
+```
+* Buffer COnstructor is available globally in nodejs- no need to do "require("buffer")"
+```javascript
+var buf = new Buffer('Hello', 'utf8');
+console.log(buf);
+console.log(buf.toString());
+console.log(buf.toJSON());
+console.log(buf[2]);
+
+buf.write('wo');
+console.log(buf.toString());
+```
+## File Read (streams and pipes)
+```javascript
+var fs = require('fs');
+fs.readFileSync(<filepath>, <encoding>);
+// if enconing is not passed data arg will be a buffer
+fs.readFile(<filepath>, <encoding>, function(err, data{
+})); // callback is error first callback
+
+```
+* above code eats memory because buffer is in heap
+* Stream classes in node are nearly abstract
+* Streams inherits from EventEmitter
+* Many types of streams(implementations) available like readable, writable, duple, transform, passthrough streams
+	1.	Readable Stream- only allows reading the stream bu cannot write
+	2.	Writable Stream - Opposite of Readable stream - can write but cannot read
+	3.	Duplex Stream - can do read and write both
+	4.	Transform Stream - Changing the data as is passes through stream
+	5.	passthrough stream - 
+### read write through stream example	
+```javascript
+var fs = require('fs');
+var readable = fs.createReadStream(__dirname + '/greet.txt', { encoding: 'utf8', highWaterMark: 16 * 1024 });
+var writable = fs.createWriteStream(__dirname + '/greetcopy.txt');
+readable.on('data', function(chunk) {
+	writable.write(chunk);
+});
+```
+* pipes are way to connect 2 streams - pipes can be chained
+```javascript
 
 ```
