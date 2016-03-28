@@ -267,7 +267,13 @@ readable.on('data', function(chunk) {
 	writable.write(chunk);
 });
 ```
-* pipes are way to connect 2 streams - pipes can be chained
+* pipes are way to connect 2 streams - pipes can be chained - pipes are chaining methods mostly
 ```javascript
-
+var fs = require('fs');
+var zlib = require('zlib');
+var readable = fs.createReadStream(__dirname + '/greet.txt');
+var writable = fs.createWriteStream(__dirname + '/greetcopy.txt');
+var compressed = fs.createWriteStream(__dirname + '/greet.txt.gz');
+var gzip = zlib.createGzip();
+readable.pipe(writable);
 ```
