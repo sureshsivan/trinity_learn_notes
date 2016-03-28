@@ -38,3 +38,10 @@ Another difference between a thread and a process is that threads within the sam
 * all memory in stack (memory allocated to local primitives for a method) gets deallocated once the function execution completes.
 
 # Pipes
+
+# Internet Protocols
+* TCP -Transmission control protocol
+* UDP - USer Datagram Protocol
+* TCP is better but slow and heavy weight due to integrity check - order preservations open connection and acknowledgement(SSH, HTTP, SMTP)
+* UDP is fast but not reliable (DHCP, VOIP, IPTV)
+* HTTP, SMTP, DHCP are application level protocols which are built on tops of base protocols like TCP/UDP
