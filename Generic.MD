@@ -45,3 +45,15 @@ Another difference between a thread and a process is that threads within the sam
 * TCP is better but slow and heavy weight due to integrity check - order preservations open connection and acknowledgement(SSH, HTTP, SMTP)
 * UDP is fast but not reliable (DHCP, VOIP, IPTV)
 * HTTP, SMTP, DHCP are application level protocols which are built on tops of base protocols like TCP/UDP
+
+# Chrome dev tools
+https://www.youtube.com/watch?v=2zmUSoVMyRU
+https://www.youtube.com/watch?v=uRw4-yyvMAQ
+https://www.youtube.com/watch?v=dQeSRZbD1mw
+
+https://www.youtube.com/watch?v=L3ugr9BJqIs
+https://www.youtube.com/playlist?list=PLLnpHn493BHGpGXukqYsxwQw3ziW3uti6
+https://www.youtube.com/watch?v=fvfqnFYXF_8 
+https://www.youtube.com/watch?v=nOEw9iiopwI&list=PLezb8u4j2ZFcV84LOIYR_5OSn5tkYv9tR
+
+https://www.youtube.com/watch?v=o9c3U5_8tGY
