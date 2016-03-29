@@ -20,11 +20,26 @@
 // console.log(alphanumericJap)
 
 
-var fs = require('fs');
-var readable = fs.createReadStream(__dirname + '/greet.txt', { encoding: 'utf8', highWaterMark: 16 * 1024 });
-var writable = fs.createWriteStream(__dirname + '/greetcopy.txt');
+// var fs = require('fs');
+// var readable = fs.createReadStream(__dirname + '/greet.txt', { encoding: 'utf8', highWaterMark: 16 * 1024 });
+// var writable = fs.createWriteStream(__dirname + '/greetcopy.txt');
 
-readable.on('data', function(chunk) {
-	writable.write(chunk);
-});
+// readable.on('data', function(chunk) {
+// 	writable.write(chunk);
+// });
 
+
+var http = require('http');
+var fs = require("fs");
+http.createServer(function(req, res){
+    res.writeHead(200, {"Content-Type": "text/html"});
+    // var content = fs.readFileSync(__dirname + "/test.html");
+    // res.end(content);
+
+    // fs.readFile(__dirname + "/test.html", function(err, data){
+    //     res.end(data);
+    // });
+
+    fs.createReadStream(__dirname + "/test.html").pipe(res);  
+    
+}).listen(1234, '127.0.0.1');
