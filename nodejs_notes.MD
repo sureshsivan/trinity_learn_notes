@@ -277,3 +277,22 @@ var compressed = fs.createWriteStream(__dirname + '/greet.txt.gz');
 var gzip = zlib.createGzip();
 readable.pipe(writable);
 ```
+
+# http
+* node internally ises "http-parser" - C library for http handling
+```javascript
+var http = require('http');
+var fs = require("fs");
+http.createServer(function(req, res){
+    res.writeHead(200, {"Content-Type": "text/html"});
+    // var content = fs.readFileSync(__dirname + "/test.html");
+    // res.end(content);
+
+    // fs.readFile(__dirname + "/test.html", function(err, data){
+    //     res.end(data);
+    // });
+
+    fs.createReadStream(__dirname + "/test.html").pipe(res);  
+    
+}).listen(1234, '127.0.0.1');
+```
