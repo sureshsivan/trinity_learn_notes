@@ -58,7 +58,7 @@ https://www.youtube.com/watch?v=nOEw9iiopwI&list=PLezb8u4j2ZFcV84LOIYR_5OSn5tkYv
 
 https://www.youtube.com/watch?v=o9c3U5_8tGY
 
-# Semantic Versioning
+# Semantic Versioning (semver.org)
 * x.y.z format
 ```text
 1.0.0
