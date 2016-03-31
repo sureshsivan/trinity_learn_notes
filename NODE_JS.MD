@@ -296,3 +296,8 @@ http.createServer(function(req, res){
     
 }).listen(1234, '127.0.0.1');
 ```
+
+# NPM 
+* package manager for NodeJS
+
+
