@@ -57,3 +57,13 @@ https://www.youtube.com/watch?v=fvfqnFYXF_8
 https://www.youtube.com/watch?v=nOEw9iiopwI&list=PLezb8u4j2ZFcV84LOIYR_5OSn5tkYv9tR
 
 https://www.youtube.com/watch?v=o9c3U5_8tGY
+
+# Semantic Versioning
+* x.y.z format
+```text
+1.0.0
+1.1.3 - patch
+1.2.1 - minor version
+1.2.1-RELEASE - valid
+```
+
