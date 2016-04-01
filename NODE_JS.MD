@@ -301,3 +301,37 @@ http.createServer(function(req, res){
 * package manager for NodeJS
 
 
+# Express
+```javascript
+var express = require('express');
+var app = express();
+app.get("/", function(req, res){
+	res.json({test: "test"});
+})
+app.listen(3000);
+```
+## route and mire
+```javascript
+app.get('/', function(req, res) {
+	res.send('<html><head></head><body><h1>Hello world!</h1></body></html>');
+});
+
+app.get('/person/:id', function(req, res) {
+	res.send('<html><head></head><body><h1>Person: ' + req.params.id + '</h1></body></html>');
+});
+
+app.get('/api', function(req, res) {
+	res.json({ firstname: 'John', lastname: 'Doe' });
+});
+
+var mymiddleware = function(req, res. next){
+	console.log("Middleware hit");
+	next();
+}
+//app.get('/', mymiddleware);
+app.use(mymiddleware);	//	for all the requests
+
+```
+
+# Templates
+
