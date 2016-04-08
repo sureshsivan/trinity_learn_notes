@@ -89,6 +89,8 @@
 
 ### IAM
 * Identity and Access Management - user groups and roles controlling
+* should enable MFA(Multi Factor Authentication) for root user
+* All users created only gets no access if we do not assign them any roles or policies or groups
 
 ### Directory Services
 
