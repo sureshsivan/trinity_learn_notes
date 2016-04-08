@@ -86,24 +86,38 @@
 ### Quick Sight
 * Business Intelligent Service (like cognos) - does adhoc analysis/visualizatons and more
 
-
+---
 ### IAM
 * Identity and Access Management - user groups and roles controlling
 * should enable MFA(Multi Factor Authentication) for root user
 * All users created only gets no access if we do not assign them any roles or policies or groups
+* Cannot switch **roles** after EC2 provisioning(running) - but **permissions** can be changed inside the role
 
-#### Active Directory Authentication with IAM
+#### Active Directory Federation Authentication with IAM
 * It is possible to use federated login(SSO/LDAP)
 * ADFS - Active Directory Federated server
-* SAML - Security Assertion Markup Language
+* SAML - Secure Assertion Markup Language
 * Flow
     * browser to ADFS server (either by user or by AWS redirection)
     * ADFS server asks for authentication
     * after auth by ADFS - SAML response sent by ADFS server
-    * SAML - submitted to AWS  - that returns a temp security credential and constructs signin url for AWS console
+    * SAML - submitted to AWS **AssumeRoleWithSAML** - that returns a temp security credential and constructs signin url for AWS console
     * client url redirected to AWS console
+    * AWS SAML signin endpoint [http://signin.aws.amazon.com/saml](http://signin.aws.amazon.com/saml)
     
-
+#### Web Identity Federation (with Mobile Application)
+* authentication using services like google/facebook/linkedin...
+* ARN - Amazon Resource Name
+* [Further Reading](https://aws.amazon.com/articles/4617974389850313)
+* Flow
+    * Authenticate with web identity provider (user triggers from Web Identity Federation PLayground)
+        * accessToken, userID, expiresIn, signedRequest... and more will be sent back by web identity provider
+    * Click - Call **AssumeRoleWithWebIdentity** and then proceed to step 3
+        * This step retrieves temporary security credential (from AWS)
+        * also it return other details like Access Key ID, Secret Access, Session Token
+    * With above details it is possible to talk to AWS resources
+---    
+        
 
 ### Directory Services
 
