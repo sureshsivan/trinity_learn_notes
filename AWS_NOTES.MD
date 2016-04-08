@@ -92,6 +92,19 @@
 * should enable MFA(Multi Factor Authentication) for root user
 * All users created only gets no access if we do not assign them any roles or policies or groups
 
+#### Active Directory Authentication with IAM
+* It is possible to use federated login(SSO/LDAP)
+* ADFS - Active Directory Federated server
+* SAML - Security Assertion Markup Language
+* Flow
+    * browser to ADFS server (either by user or by AWS redirection)
+    * ADFS server asks for authentication
+    * after auth by ADFS - SAML response sent by ADFS server
+    * SAML - submitted to AWS  - that returns a temp security credential and constructs signin url for AWS console
+    * client url redirected to AWS console
+    
+
+
 ### Directory Services
 
 
