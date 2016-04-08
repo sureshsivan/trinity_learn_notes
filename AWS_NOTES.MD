@@ -11,9 +11,60 @@
 ### Route 53
 * Amazons DNS service - 53 stands for default DNS service port
 
-### EC2 - Elastic Compute Clour
+---
+
+### EC2 - Elastic Compute Cloud
 * Virtual Computers
 * AMI - Amazon Machine Image - comes with mny required softwares like AWS cli, ruby , php...
+* When creating EC2 - subnet mask can be assigned to any of the availability zone in the region
+* Only one roll can be assigned for an EC2 machine
+* user data can be entered which is a shell script if we want some script to be ran  after login
+* tagging instances are used for identification and more - for ex - env tagged as dev/prod, owner tagged as admin/department user and more
+* make sure private key file is protected with 400 access (pem file)
+* to find the default username for different EC2 images - try login with root (ssh root@<public_ec2_ip> -i pem file)
+* ssh <public_ec2_ip> -l <user-name> -i <pem file path>
+
+#### AWS Command line tool configuration
+* aws cli should be configured with an IAM user with valid access assigned to it.
+* aws <command> <subcommand> - ex aws s3 ls
+* aws cli should be configured - using aws configure command
+* default config files will be stored under ~/.aws/config file (only if credentials are not entered)
+* if credentials are entered during aws configure - it creates credentials file which overrides config file
+* edit config file with keys "aws_access_key_id", "aws_secret_access_key"
+* entry in credentials file always overrides config file
+
+```code()
+config file
+[default]
+aws_access_key_id=<val>
+aws_secret_access_key=<val>
+region = us-west-1
+
+[user1]
+aws_access_key_id=<val>
+aws_secret_access_key=<val>
+region = us-west-1
+
+credentials file
+[default]
+aws_access_key_id=<val>
+aws_secret_access_key=<val>
+region = us-west-1
+
+[user1]
+aws_access_key_id=<val>
+aws_secret_access_key=<val>
+region = us-west-1
+
+```
+* better not to save access and secret keys in EC2 like this - use roles instead
+* if user role s assigned to EC2 instance while creation - then no need to do aws configure if we want to connect from one aws service to anothe (for ex AWS EC2 to AWS S3)
+* If we have to connect to AWS resource from outside 9local development machine fro example) install aws cli in local machine and configure it to use corect access and secret keys
+
+#### AWS Roles configuration
+
+
+---
 
 ### ECS - EC2 Container Service
 * For docker containers running in EC2 cluster
@@ -117,6 +168,9 @@
         * This step retrieves temporary security credential (from AWS)
         * also it return other details like Access Key ID, Secret Access, Session Token
     * With above details it is possible to talk to AWS resources
+
+* Access key Id and Secret access key are used for AWS cli to communicate to aws services.
+* It can be always re created for every IAM user.
 
 ---    
         
