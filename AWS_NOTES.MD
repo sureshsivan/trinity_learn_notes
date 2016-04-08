@@ -13,6 +13,7 @@
 
 ### EC2 - Elastic Compute Clour
 * Virtual Computers
+* AMI - Amazon Machine Image - comes with mny required softwares like AWS cli, ruby , php...
 
 ### ECS - EC2 Container Service
 * For docker containers running in EC2 cluster
