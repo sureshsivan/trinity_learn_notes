@@ -116,6 +116,7 @@
         * This step retrieves temporary security credential (from AWS)
         * also it return other details like Access Key ID, Secret Access, Session Token
     * With above details it is possible to talk to AWS resources
+
 ---    
         
 
