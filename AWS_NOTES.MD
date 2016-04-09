@@ -18,7 +18,13 @@
 * AMI - Amazon Machine Image - comes with mny required softwares like AWS cli, ruby , php...
 * When creating EC2 - subnet mask can be assigned to any of the availability zone in the region
 * Only one roll can be assigned for an EC2 machine
-* user data can be entered which is a shell script if we want some script to be ran  after login
+* user data can be entered which is a shell script if we want some script to be ran  after login - will be run as root user
+```sh
+#!/bin/bash
+yum update -y
+yum install httpd24 -y
+service httpd start
+```
 * tagging instances are used for identification and more - for ex - env tagged as dev/prod, owner tagged as admin/department user and more
 * make sure private key file is protected with 400 access (pem file)
 * to find the default username for different EC2 images - try login with root (ssh root@<public_ec2_ip> -i pem file)
