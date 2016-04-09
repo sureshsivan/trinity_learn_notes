@@ -67,7 +67,24 @@ region = us-west-1
 * if user role s assigned to EC2 instance while creation - then no need to do aws configure if we want to connect from one aws service to anothe (for ex AWS EC2 to AWS S3)
 * If we have to connect to AWS resource from outside 9local development machine fro example) install aws cli in local machine and configure it to use corect access and secret keys
 
-#### AWS Roles configuration
+
+
+#### EC2 Roles configuration
+* Assign role during EC2 creation
+* policies in the rule can be modified even if the EC2 instance is running
+
+
+#### EC2 instance metadata
+* (more to read)[http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html]
+* http://169.254.169.254/latest/meta-data
+* if user data (boot script) is included during instance creation that also can be viewed
+* if user data is modified through console  - it reflects only aftere restarting the instance
+
+---
+
+
+### ELB - Elastic Load Balancer
+
 
 
 ---
@@ -87,6 +104,8 @@ region = us-west-1
 ### S3 - Simple Storage Storage
 * Object based storage
 * offers API
+* Files in S3 are called as objects - stored under buckets - bucket name should be unique across all AWS users (basically it is a namespace)
+
 
 ### Cloud Frong
 * Amazon CDN - Cloud delivery Network
