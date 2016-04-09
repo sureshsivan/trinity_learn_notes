@@ -72,7 +72,7 @@ region = us-west-1
 #### EC2 Roles configuration
 * Assign role during EC2 creation
 * policies in the rule can be modified even if the EC2 instance is running
-
+* Disk encryption applied @ EBS level
 
 #### EC2 instance metadata
 * (more to read)[http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html]
@@ -80,11 +80,35 @@ region = us-west-1
 * if user data (boot script) is included during instance creation that also can be viewed
 * if user data is modified through console  - it reflects only aftere restarting the instance
 
+
+---
+
+### AWS SDK
+* android, iOS, javascrip(browser)
+* Java, python, .net, nodeJS, nodejs, ruby, php, Go, C++
+* some SDKs have default regions like java - it is us-east-1  nodeJS do not have default region
+* setup region in SDK code
+
 ---
 
 
 ### ELB - Elastic Load Balancer
-
+* Can have multiple SSL certificates on an ELB
+* Multiple ssl certificates can be terminated at once an ELB - like terminating all SSL certificates on an ELB.
+* Not Free - on hour and per GB usage
+* Cloud Formation, Elastic BEanstalk, Autoscaling are free - results of these services are not free
+* ELB can use these ports - SMTP:25, http:80, https:448 and then 1024~65535
+* HTTP Codes
+```code()
+200 - request success
+404 - not found
+500 - INternal Server Error
+3xx - redirection
+4xx - client error
+404 - not found
+500 - server error
+Read more about http codes
+```
 
 
 ---
@@ -307,4 +331,5 @@ region = us-west-1
 
 
 # TODO - Before Exam
+ * Go through __FAQ__ section of each area targetted for the exam
 * Go through COde Commit, Code Deploy, Code Pipeline
