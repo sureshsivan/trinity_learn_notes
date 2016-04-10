@@ -203,9 +203,12 @@ Read more about http codes
 * Data archieval service  - cheaper than S3 (standard and reduced redundancy mode) - .01$/month/GB
 * storage anm retrieval is generally longer than S3 - 3-5 hrs are best match
 
+---
 
-### Cloud Frong
-* Amazon CDN - Cloud delivery Network
+### Cloud Fron
+* Amazon CDN - Cloud delivery Network - deliver static files from edge locations 
+
+---
 
 ### EFS - Elastic File System
 * Like a NAS in the cloud - can be connected to multiple EC2 
