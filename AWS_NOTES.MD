@@ -131,6 +131,7 @@ Read more about http codes
 * Can have ACL (Access Control Lists) in granular level like role/user/bucket/file based 
 * Integrates well with IAM when EC2 talsk to S3
 * S3 integrates well with cloud front  
+* Cannot rename bucket - delete and re create is the option 
 * allows upload parts of file (multipart file) - useful for large files
 * > 100 mb file is better if uploaded with multipart - if it > 5GB should be uploaded through multipart
 * Allows stop/resume file upload   
@@ -161,8 +162,43 @@ Read more about http codes
     * format : __<bucket_name>.s3-website-<region>.amazonaws.com__   
     
 #### S3 CORS (Cross Origin Resource Sharing)
-* 
-                                              
+* CORS should be configured in destination resourec - from where /how it can be accessed.
+```code()
+<?xml version="1.0" encoding="UTF-8"?>
+<CORSConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
+    <CORSRule>
+        <AllowedOrigin>ORIGIN S3 BUCKET URL HERE</AllowedOrigin>
+        <AllowedMethod>GET</AllowedMethod>
+        <MaxAgeSeconds>3000</MaxAgeSeconds>
+        <AllowedHeader>*</AllowedHeader>
+    </CORSRule>
+</CORSConfiguration>                                             
+```                                             
+
+### S3 - versioning and Lifecycle management
+* If versining enable it cannot be disable - only it can be suspended - or the bucket should be deleted - cost can be controlled by lifecycle
+* can lead to cost increase as every update is stored as bucket version
+* every version of the file is maintained - if same file uploaded again it still counts as 2 versions
+* REST api available for v ersioned file as well
+    * Ex : https://<file_url>?versionId=<version_id>
+* Life cycle management enabled with or without versioning
+* mainly used with versioning - Ex : moving older version files to glacier 
+* Lifecycle management can be enabled for whole bucket or specic folder/object in a bucket
+* Lifecycle actions include below (__check in AWS for versioned and non-vrsioned buckets__)
+    * Archive Only - Ex : Move to glacier after N days
+    * Expire - Ex : Expire the file after N Days (if not versioned - it is equivalant to delete)
+    * Archive and expire - Ex : Archive to Glacier after N days and then expire after N+M Days
+    * Transition to infrequent access storage
+    * Permanently deleting - older version of files
+    * Cleaning up partial multipart uploads
+* Expire for versioned object means - moving current to previous version and place a delta marker in current version - to delete permanentlt(versioned objects) should combine
+     expire on current version and permanently delete the previous version
+* if versioning was enabled - these above rules can be applied to older versions and new versions of files differently
+* Naming a rule is optional    
+
+
+---                                              
+                                                                                                                                          
 #### Glacier
 * Data archieval service  - cheaper than S3 (standard and reduced redundancy mode) - .01$/month/GB
 * storage anm retrieval is generally longer than S3 - 3-5 hrs are best match
