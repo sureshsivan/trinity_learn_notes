@@ -128,7 +128,7 @@ Read more about http codes
 ### S3 - Simple Storage Storage
 * Object based storage - everything stored in buckets
 * All buckets are private by default
-* Can have ACL (Access Control Lists) in granular level like role/user/bucket/file based based 
+* Can have ACL (Access Control Lists) in granular level like role/user/bucket/file based 
 * Integrates well with IAM when EC2 talsk to S3
 * S3 integrates well with cloud front  
 * allows upload parts of file (multipart file) - useful for large files
@@ -153,7 +153,9 @@ Read more about http codes
     * upload/download vie SSL encrypted endpoint
     * supports server side encryption - keys can be managed by S3 itself of AKM (AWS Key Management) or privately
     * can do  client side encryption : client can encrypt the data and encrypted data can be stored in S3
-    
+* S3 buckets has multiple settings like permissions,static site hosting, logging, Event notification, lifecycle , tags, versining, CORS, 
+    Requestor pays (will force the dowloader to pay for AWS bandwith usage)
+        
 #### Glacier
 * Data archieval service  - cheaper than S3 (standard and reduced redundancy mode) - .01$/month/GB
 * storage anm retrieval is generally longer than S3 - 3-5 hrs are best match
