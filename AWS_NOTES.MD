@@ -128,17 +128,18 @@ Read more about http codes
 ### S3 - Simple Storage Storage
 * Object based storage - everything stored in buckets
 * All buckets are private by default
+* can have only 100 buckets pee AWS account - further can be requested by submitting request 
 * Can have ACL (Access Control Lists) in granular level like role/user/bucket/file based 
 * Integrates well with IAM when EC2 talsk to S3
 * S3 integrates well with cloud front  
 * Cannot rename bucket - delete and re create is the option 
 * allows upload parts of file (multipart file) - useful for large files
-* > 100 mb file is better if uploaded with multipart - if it > 5GB should be uploaded through multipart
+* > 100 mb file is better if uploaded with multipart - if it > __5GB__ should be uploaded through multipart
 * Allows stop/resume file upload   
 * all the copied files are synced between availability zone in that region (might be a little (nano seconds) delay in sync up) 
 * offers API - aws cli
 * web services interface to store and retrieve files
-* size 1byte to 5TB - unlimited storage
+* size __1byte to 5TB__ - unlimited storage
 * Files in S3 are called as objects - stored under buckets - bucket name should be unique across the region (basically it is a namespace)
 * 99.9% availability and 99.999999999% durability in standard mode
 * 99.9% availability and 99.99% durability in reduced redundancy storage mode
@@ -151,6 +152,7 @@ Read more about http codes
      * Archive and then permanently delete  
 * supports encryption
     * Uses AES 256 - Advanced Encryption Standard 256
+    * Data is secured with X5098 certificates
     * upload/download vie SSL encrypted endpoint
     * supports server side encryption - keys can be managed by S3 itself of AKM (AWS Key Management) or privately
     * can do  client side encryption : client can encrypt the data and encrypted data can be stored in S3
@@ -202,12 +204,59 @@ Read more about http codes
 #### Glacier
 * Data archieval service  - cheaper than S3 (standard and reduced redundancy mode) - .01$/month/GB
 * storage anm retrieval is generally longer than S3 - 3-5 hrs are best match
-
+* store and add files to vaults - supports data retrieval policies and event notofications
 ---
 
-### Cloud Fron
-* Amazon CDN - Cloud delivery Network - deliver static files from edge locations 
+### Cloud Front
+* Amazon CDN - Cloud delivery Network - deliver static files from edge locations (dynamic files also can be cached - not files but the static content associated with the url actually)
+* Cloud front is optimized to work with other services like S3, Route 53, EC2, ELB
+* Terminology
+    * Origin - origin of a file - can be s3, ELB or route 53
+    * Distribution - collection of edge locations
+* One distribution with multiple origin is possible
+* Distribution Types : 
+    * Web Distribution - web apps - can be used for live steeaming also
+    * RTMP - MEdia Streaming (files must be in S3)
+#### Creation of distribution liost
+* Origin can be either S3 or ELB     
+* cloud front can restrict S3 public access (Restrict Bucket Access menu)
+* with path pattern - can specifi multiple origins based on path - for Ex : *.jpef - go to S3, *.php - go to ELB...
+* Viewer protocol policy below are possible
+    * HTTP, HTTPS only
+    * Redirect HTTP to HTTPS
+    * HTTPS only
+* Allowed HTTP Methods
+    * GET, HEAD
+    * GET, HEAD, OPTIONS
+    * GET, HEAD, OPTIONS, PUT, POST, PATCH, DELETE
+* Cached HTTP Methods
+    * can cache only specific methods from above -for example - can cache OPTIONS method if required
+* Forward Headers
+    * Forwarding all or only whitelisted headers to origin
+* Object Caching
+    * cloud front can use origin's cache headers 
+* TTL 
+    * Applicable only if above setting is custon - dont want to use origin's cache headers
+    * set values in seconds - minimum maximum, default
+    * Minimum TTL is 300 seconds
+* Forward Cookies
+    * Forwarding all or only whitelisted cookies to origin
+* Forward Query Strings
+    * ask cloud front to include the query string
+* Restrict Viewer Access
+    * Rsstrict viewer acces based on signed url (AWS accout #s can be specified)
+* Compress Objects Automaticall
+    * Enables automatic gzip comression 
+* Smooth Streaming - used for microsoft streaming services
+*
 
+* Price class 
+    * All
+    * US Europe
+    * US Eurpe and Asia
+* Alternate Domain Names - can specifi custon name instead of CDN name (*.cloudfront.net)
+* If want to use own SSL certificate we can use - or we can stick with default cloudfront SSL cert.
+* Default Root Object - default landing page - can enable logging also    
 ---
 
 ### EFS - Elastic File System
@@ -407,3 +456,6 @@ Read more about http codes
 # TODO - Before Exam
  * Go through __FAQ__ section of each area targetted for the exam
 * Go through COde Commit, Code Deploy, Code Pipeline
+* If you want to enable a user to download your private data directly from S3, you can insert a pre-signed URL into a web page before giving it to your user. --> TRUE
+
+
