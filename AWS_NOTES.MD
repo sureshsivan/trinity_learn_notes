@@ -126,11 +126,37 @@ Read more about http codes
 
 
 ### S3 - Simple Storage Storage
-* Object based storage
-* offers API
-* Files in S3 are called as objects - stored under buckets - bucket name should be unique across all AWS users (basically it is a namespace)
+* Object based storage - everything stored in buckets
+* All buckets are private by default
+* Can have ACL (Access Control Lists) in granular level like role/user/bucket/file based based 
+* Integrates well with IAM when EC2 talsk to S3
+* S3 integrates well with cloud front  
+* allows upload parts of file (multipart file) - useful for large files
+* > 100 mb file is better if uploaded with multipart - if it > 5GB should be uploaded through multipart
+* Allows stop/resume file upload   
+* all the copied files are synced between availability zone in that region (might be a little (nano seconds) delay in sync up) 
+* offers API - aws cli
+* web services interface to store and retrieve files
+* size 1byte to 5TB - unlimited storage
+* Files in S3 are called as objects - stored under buckets - bucket name should be unique across the region (basically it is a namespace)
 * 99.9% availability and 99.999999999% durability in standard mode
-* 99.9% availability and 99.99% durability in low redundancy mode
+* 99.9% availability and 99.99% durability in reduced redundancy storage mode
+* can have metadata(key value pair on each files)
+* supports lifecycle maintenance and versioning (versionning records deletion as well)
+* versioning cannot be disabled once enabled. can be suspended
+* Lifecycle management can be used with/without verioning - and can be applied to current/previous versions of S3 file
+     * Archive Only
+     * Permanently Delete only
+     * Archive and then permanently delete  
+* supports encryption
+    * Uses AES 256 - Advanced Encryption Standard 256
+    * upload/download vie SSL encrypted endpoint
+    * supports server side encryption - keys can be managed by S3 itself of AKM (AWS Key Management) or privately
+    * can do  client side encryption : client can encrypt the data and encrypted data can be stored in S3
+    
+#### Glacier
+* Data archieval service  - cheaper than S3 (standard and reduced redundancy mode) - .01$/month/GB
+* storage anm retrieval is generally longer than S3 - 3-5 hrs are best match
 
 
 ### Cloud Frong
@@ -164,8 +190,6 @@ Read more about http codes
 ### Redshift
 * Data Warehousing Service (Business Intelligence DB Server)
 
-### Glacier
-* Data archieval service
 
 ### DMS
 * Database Migration Service - used for migration 
