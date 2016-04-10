@@ -129,6 +129,8 @@ Read more about http codes
 * Object based storage
 * offers API
 * Files in S3 are called as objects - stored under buckets - bucket name should be unique across all AWS users (basically it is a namespace)
+* 99.9% availability and 99.999999999% durability in standard mode
+* 99.9% availability and 99.99% durability in low redundancy mode
 
 
 ### Cloud Frong
