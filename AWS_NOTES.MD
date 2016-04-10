@@ -155,7 +155,14 @@ Read more about http codes
     * can do  client side encryption : client can encrypt the data and encrypted data can be stored in S3
 * S3 buckets has multiple settings like permissions,static site hosting, logging, Event notification, lifecycle , tags, versining, CORS, 
     Requestor pays (will force the dowloader to pay for AWS bandwith usage)
-        
+* for static web site - should mention index document and error document        
+* end point for static site will be shown immediately. format below
+    * Ex : black-gate-static-site.s3-website-us-west-1.amazonaws.com
+    * format : __<bucket_name>.s3-website-<region>.amazonaws.com__   
+    
+#### S3 CORS (Cross Origin Resource Sharing)
+* 
+                                              
 #### Glacier
 * Data archieval service  - cheaper than S3 (standard and reduced redundancy mode) - .01$/month/GB
 * storage anm retrieval is generally longer than S3 - 3-5 hrs are best match
