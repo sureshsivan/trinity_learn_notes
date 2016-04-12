@@ -278,7 +278,8 @@ Read more about http codes
 * Cloud database service (oracle, MS SQL...)
 
 ### Dynamo DB 
-* No SQL from AWS
+* No SQL from AWS - Document based database
+* Similar to MongoDB - but cannot have custom data types.
 
 ### Elasticache
 * Cache service for data from AWS (used with AWD DB services)
