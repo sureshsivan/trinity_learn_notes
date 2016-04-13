@@ -275,18 +275,43 @@ Read more about http codes
 * Gateway between cloud and organization network
 
 ### RDS - Relational Database Servide
-* Cloud database service (oracle, MS SQL...)
+* Cloud database service (oracle, MS SQL, mySQL, postgres, aurora)
 
 ### Dynamo DB 
-* No SQL from AWS - Document based database
-* Similar to MongoDB - but cannot have custom data types.
-
+* No SQL from AWS - supports Document and key-value data models
+* Similar to MongoDB - but cannot have custom(Embedded) data types.
+* SSD storage and repliocated across __3__ facilities (data centers).
+* COnsistency model
+    * Eventually Consistent Reads(Default) - eventually will be available in other 2 facilities - since replication lags some milliseconds. generally happens withing a second. (no specific SLA from documentation)
+    * Strongly COnsistent Reads - available in other 2 facilities before any read operations from any other read operation from anu other facilities.
+```json
+{
+"_id": ObjectId("271864abvkahjbfvskjhfbvalkq97yqaifgjb"),
+"fname": "fnameeee",
+"lname": "lnamebsdjfh",
+"address": {            //    not possible - embedded
+        "street": "sdfbsdf",
+        "zip": 123456
+    }
+}
+```
+* Pricing  
+    * TRhroughput - .0065$/Hour for every 10 units write and every 50 units read
+    * storage - .25$ per month
+``` code()
+//Pricing Example
+App requires 1 million reads and 1 million writes per day and storing 3GB of data
+11.6 writes/ second and 11.6 reads/second = 12 read capacity units and 12 write capacity units
+12 read units would cost .0374 and 12 write capacity units would cost .1872 and in total - .2246 per day
+Storage is .25/GB/month so - .025$/day
+total cost is .025 + .2246 = .2496$/day
+```        
 ### Elasticache
-* Cache service for data from AWS (used with AWD DB services)
-* memcache and redis cache engines
+* In Memory Cache service for data from AWS (used with AWD DB services)
+* supports 2 in-memory open source implementations - memcached and redis cache engines
 
 ### Redshift
-* Data Warehousing Service (Business Intelligence DB Server)
+* Data Warehousing Service (Business Intelligence DB Server) - OLAP database
 
 
 ### DMS
@@ -298,7 +323,7 @@ Read more about http codes
 ### Data pipeline
 * moving data from one service to another
 
-### Elastic Service
+### Elastic Search Service
 * Elastic search - in real time - does log analytics/real time monitoring/ click strream analytics and more
 
 ### Kinesis

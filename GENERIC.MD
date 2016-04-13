@@ -67,3 +67,7 @@ https://www.youtube.com/watch?v=o9c3U5_8tGY
 1.2.1-RELEASE - valid
 ```
 
+# Type of Databases
+* OLTP
+* OLAP
+* NO-SQL
