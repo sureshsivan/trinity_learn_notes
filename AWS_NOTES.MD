@@ -321,7 +321,7 @@ total cost is .025 + .2246 = .2496$/day
         * This can be created during tabel creation or can be added later
 * __5__  locala and __5__ global secoondary indes are the limit per table.
 
-          
+           
           
 ---
     
