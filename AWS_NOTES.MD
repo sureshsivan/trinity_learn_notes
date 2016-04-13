@@ -298,14 +298,33 @@ Read more about http codes
 * Pricing  
     * TRhroughput - .0065$/Hour for every 10 units write and every 50 units read
     * storage - .25$ per month
-``` code()
+```code()
 //Pricing Example
 App requires 1 million reads and 1 million writes per day and storing 3GB of data
 11.6 writes/ second and 11.6 reads/second = 12 read capacity units and 12 write capacity units
 12 read units would cost .0374 and 12 write capacity units would cost .1872 and in total - .2246 per day
 Storage is .25/GB/month so - .025$/day
 total cost is .025 + .2246 = .2496$/day
-```        
+```      
+* nice to have a role if EC2 wants to interact with Dynamo DB
+* Primary Index 
+    * HAsh key or partition key - Index will automatically be craeted on this hash key (primary) - check for latest version
+    * Hash key + Range Key (Sort Key) (like a composite key)
+        * Un ordered index on the hash ordered/sorted index on the range/sort key
+    * can have data of 64 kb in size    
+* Secondary Index 
+    * Local Secondary Index
+        * Same hash key and different range key.
+        * can only be created during table creation - cannot be modified after table creation
+    * Global Secondary Index    
+        * Different hash key and different range key
+        * This can be created during tabel creation or can be added later
+* __5__  locala and __5__ global secoondary indes are the limit per table.
+
+          
+          
+---
+    
 ### Elasticache
 * In Memory Cache service for data from AWS (used with AWD DB services)
 * supports 2 in-memory open source implementations - memcached and redis cache engines
