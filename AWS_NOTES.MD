@@ -307,11 +307,12 @@ Storage is .25/GB/month so - .025$/day
 total cost is .025 + .2246 = .2496$/day
 ```      
 * nice to have a role if EC2 wants to interact with Dynamo DB
-* Primary Index 
-    * HAsh key or partition key - Index will automatically be craeted on this hash key (primary) - check for latest version
+* Indexes always is made up of one or two attributes (hash or hash and range)
+* Primary key attributes (Primary Index)
+    * HAsh key or partition key - Index will automatically be craeted on this hash key (if PK composed of only hash attribute) - check for latest version 
     * Hash key + Range Key (Sort Key) (like a composite key)
-        * Un ordered index on the hash ordered/sorted index on the range/sort key
-    * can have data of 64 kb in size    
+        * __Un ordered index on the hash  - ordered/sorted index on the range/sort key__
+    * each attributes cannot exceed 64 kb in size    
 * Secondary Index 
     * Local Secondary Index
         * Same hash key and different range key.
@@ -319,7 +320,8 @@ total cost is .025 + .2246 = .2496$/day
     * Global Secondary Index    
         * Different hash key and different range key
         * This can be created during tabel creation or can be added later
-* __5__  locala and __5__ global secoondary indes are the limit per table.
+* __5__  locala and __5__ global secoondary indexes are the limit per table.
+           
 
            
           
