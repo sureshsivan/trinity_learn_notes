@@ -322,7 +322,17 @@ total cost is .025 + .2246 = .2496$/day
         * This can be created during tabel creation or can be added later
 * __5__  locala and __5__ global secoondary indexes are the limit per table.
            
-
+#### Query  vs Scan
+* Query operatioin should contain primary key based search(hash key must be provided)
+* Query can have range as optional attribute
+* By default Query returns all the column (including hash attribute) - can use __Projection expression__ if we want to limit the columns
+* Query results are always sorted by range ky - ascending (numeric or ascii  char code values) - to reverse it __set ScanIUndexForward__ param to false.
+* By default Query is eventually consisten - but can be configured to strongly consistent
+* Scan checks every item in table - return all column/attributes in the table but can use __Projection expression__ if we want to limit attributes.
+* Inefficient - as it scans the entire table
+* Avoid using scans on large tables
+* scan becomes more slow when tabel grows. It might eat the all throughput of the table quickly.
+* __USe Query, Get, BatchGetItem__ APIs than scan.      
            
           
 ---
