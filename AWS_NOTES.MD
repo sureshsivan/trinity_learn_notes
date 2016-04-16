@@ -528,8 +528,20 @@ total cost is .025 + .2246 = .2496$/day
 * 
 
 ### SQS - Simple Queue Service
-* decoupling infrastructure
+* decoupling infrastructure components of AWS - producer consumer pattern
 * The first service launched by AWS
+* Web service message Queue which can be used to store messages waiting for computers to process them - queue is a temporary repository for the messages waiting to be processed
+* __256 KB__ of message can be stored in failsafe queue - billing @ 64 kb chunks.
+* multiple producers and consumers can be linked to one queue
+* Does not guarantee __FIFO__ - if needed that should be handled separately 
+* Ensures delivery of each message atleast once - after polling message will not be deleted/removed automatically from the queue - consumer has to delete it from the queue
+* If consumer fails to delete in a timeframe - the message will start be visible to other consumers
+* messages are not pushed by queue - consumer has to __poll__.
+* Visibility timeout check happens only when message is polled
+* supports autoscaling - if queue capacity threshold reached (some %) - can spin up additional consumers and add to the queue.
+* default visibility timeout windows - 12 hr
+* single SQS request can have upto __10 message with maximum of 256 kb paylod__ - billed @ 64 kb chunk
+    * one message which contains 8 messages and 256 KB in total size is billed as 4 requests.
 
 ### SWF - Simple Workflow Service
 * to design and execute workflows in the cloud(*like batches) - sequential or parallel
