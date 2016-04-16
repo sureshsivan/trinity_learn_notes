@@ -280,7 +280,7 @@ Read more about http codes
 ### Dynamo DB 
 * No SQL from AWS - supports Document and key-value data models
 * Similar to MongoDB - but cannot have custom(Embedded) data types.
-* SSD storage and repliocated across __3__ facilities (data centers).
+* SSD storage and repliocated across __3__ facilities (data centers). (might fall under 1 or 2 availability zones)
 * COnsistency model
     * Eventually Consistent Reads(Default) - eventually will be available in other 2 facilities - since replication lags some milliseconds. generally happens withing a second. (no specific SLA from documentation)
     * Strongly COnsistent Reads - available in other 2 facilities before any read operations from any other read operation from anu other facilities.
@@ -344,15 +344,58 @@ total cost is .025 + .2246 = .2496$/day
     * all writes are i write/second.
 * Examples
     * Question : App that requires to read 10 items of 1kb/second using eventual consistency.
-        * Read Units per item = (ikb/4kb) = 0.25 -> round to 1.0
+        * Read Units per item = (1kb/4kb) = 0.25 -> round to 1.0
         * total read units for all item = 1.0 * 10 = 10 read units
         * total read units considering consistency = 10/2 = 5 (as eventual consistency allows 2 reads per second)
         * read throughput = 5 units
-    
-    
+    * Question : App that requires to read 10 items of 6kb/second using eventual consistency.
+        * Read Units per item = (6kb/4kb) = 1.5 -> round to 2.0
+        * total read units for all item = 2.0 * 10 = 20 read units
+        * total read units considering consistency = 20/2 = 10 (as eventual consistency allows 2 reads per second)
+        * read throughput = 10 units
+    * Question : App that requires to read 5 items of 10kb/second using eventual consistency.
+        * Read Units per item = (10kb/4kb) = 2.5 -> round to 3.0
+        * total read units for all item = 3.0 * 5 = 15 read units
+        * total read units considering consistency = 15/2 = 7.5 = 8 (ceil) (as eventual consistency allows 2 reads per second)
+        * read throughput = 8 units
+    * Question : App that requires to read 5 items of 10kb/second using strong consistency.
+        * Read Units per item = (10kb/4kb) = 2.5 -> round to 3.0
+        * total read units for all item = 3.0 * 5 = 15 read units
+        * total read units considering consistency = 15/1 = 15 (as eventual consistency allows 2 reads per second)
+        * read throughput = 15 units
+    * Question : App that requires to write 5 items of 10kb/second using strong consistency.
+        * Write Units per item =  = 2.5 -> round to 10
+        * total write units for all item = 10 * 5 = 50 read units
+        * write throughput = 50 units
+
+#### API Error Code
+    * 400 HTTP Status code - ProvisionedThroughputExceededException
+        * means exceeded the provisioned throughput on tables or __one or more global or secondary indexes__.
 
 
-                              
+#### Web Identity providers - Open ID providers
+    * Uses __AssumeRoleWithWebIdentity API__ from AWS.
+    * Steps
+        * Authenticates with ID provider like facebook or google
+        * They will be provided a token
+        * application code should use __AssumeRoleWithWebIdentity API__ with passed token and ARN(Amazon Resource Name) for the IAM(Identity and Access Management) role
+            * role should be created in IAM - with table access or just read access  -- and more (ARN of the Dynamo DB table should be mentioned while creating the role policy)
+        * Then app can access dynamo DB from __15 mins to 1 hr - default 1 hr__.
+
+#### Conditional Writes : 
+    * Conditional Writes are idempotent - re executing the query will not do the update again
+    
+#### Atomic counters
+    * Supports increment/decrement attribute values withouit interfering other writes.
+    * Atomic counter is not idempotent - re executing the query will make update.
+    
+#### Batch Operations
+    * USefule when the app wants to read multiple  items - __BatchGetItem__ API
+    * __BatchGetItem__ (__Not BatchGetItemS__) can retrieve upto 1MB of data which can contain as many as 100 items. and it can retrieve from multiple tables.
+
+#### Exporting data from Dynam DB
+    * export to csv - is possible
+
 ---
     
 ### Elasticache
