@@ -334,7 +334,25 @@ total cost is .025 + .2246 = .2496$/day
 * scan becomes more slow when tabel grows. It might eat the all throughput of the table quickly.
 * __USe Query, Get, BatchGetItem__ APIs than scan.      
            
-          
+
+#### Provision and throughput calculation
+* Read Throughput - Unit definition
+    * Every read is considered as __4kb ad its order__. For ex, 5kb considered as 8kb an 11 kb considerd as 12 kb.
+    * Eventually consistent(default) 2 reads per second - strong consistent reads 1 read per second.
+* Write Throughput - Unit definition
+    * All writes are considerd as 1kb and its order
+    * all writes are i write/second.
+* Examples
+    * Question : App that requires to read 10 items of 1kb/second using eventual consistency.
+        * Read Units per item = (ikb/4kb) = 0.25 -> round to 1.0
+        * total read units for all item = 1.0 * 10 = 10 read units
+        * total read units considering consistency = 10/2 = 5 (as eventual consistency allows 2 reads per second)
+        * read throughput = 5 units
+    
+    
+
+
+                              
 ---
     
 ### Elasticache
