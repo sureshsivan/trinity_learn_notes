@@ -2,6 +2,8 @@
 
 ## AWS Developer Certified Associate
 
+---
+
 ### VPC - Virtual private cloud
 * Virtual Data Center in the cloud
 * Provides logically isolated section of AWS cloud services - virtual network enviroment with own ip address range/subnet/route tables/network gateways
@@ -29,14 +31,47 @@
     * can connect to VPCs in other AWS accounts
     * peering is star configuration - each VPC can be peered with __4__ VPCs.
 * VPC Restrictions
-    * max of __5__ elastic addresses and __5__ internet gateways per VPC
+    * max of __5__ elastic addresses per vpc and __5__ internet gateways per region
     * can have __5 VPCs__ per region - additional should be requested to AWS.
     * __50 VPN Connection__ per region
     * __50 customer gateways__  per region
-    * __200 route tables per region__.
+    * __200 route tables per Region/VPC__.
     * __ 100 security groups__ per VPC - __ 50 rules per security group__.
     
+* Creating VPC
+    * CIDR - Classless Inter-Domain Routing - this is a subnet  - general value is 10.0.0.0/16
+    * IF VPC is created with dedicated tenancy - then EC2 created with those VPCs would become dedicated
+    * route table created automatically when creating VPC
+    * subnet have to created for VPC manually - always a subnet can be matched to only one availability zone for ther region in which VPC is created
+    * CIDR block for subnet - 10.0.1.0/24
+    * Available ip address under subnet is generally 254 -= but AWS reserves three so 251 available
+    * CIDR for VPC and subnet should fall into same rande - otherwise erro will thrown :: "10.0.1.0/24", "10.0.2.0/24" are in the range of "10..0.0.0/16" - given during VPC creation
+    * Internet gateway should be created manually - __by default created intenet gateway is detached__
+    * __Only one internet gateway per vpc is allowed__
+    * New route table shoudl be created for internet access to VPC
+        * mark routes to internet gateway (inder routes tab with all ip address 0.0.0.0/0)
+        * Associate one of the subnets to the route table (Subnet Association tab)
+        * once subnet is associated to intenet gateway linked route table - that will be detached from the route table automatically created by VPC.
+    * Security groups can be used across different VPC/subnets - but subnets is linked to only one VPC    
+    * if Ec2 is created with non internet gateway subnet - it will not have publiucc/elastic ip address
+    * __public subnets are internet accessible - private subnets are NOT internet accessible__
+    * EC2 created with private subnets cannot access internet - __NAT Ec2 instance and security group__ can be used to give that ability.
+    * __Source/Destination check should be disabled in NAT instance__
 
+* If NAT is not performing well - may have create a NAT instance with bigger type (micro to small to medium) - could be dues to network throughput for the type os instance
+
+* Network Access Control Lists
+    * Similar to firewall - Ex - Security group is firewall to EC2 instance - NACL is firewall to subnet
+    * If port X is opened in security group and closed in subnet NACL - then it cannot be accessed
+    * it is basically numbered rules - highese # 32766 - recommended to create rules in the order of 100 - so we can add anything in the middle if we want to 
+    * Rules numbers - lowest are evaluated first - highest rule # takes precedence
+    * __by default NACL allows all inbound/outbound traffic(the default one attched to subnet) - but if we create anew ACL - it deny all the inbound/outbound traffic__
+    * __ Each subnet must be associated with ACL - if explicitly not linked - default one will be attached.__
+    * NACL are stateless
+    * __One Subnet can/must always can have only one ACL - if new ACL is created and a subnet is attached to it - the default ACL attached to the subnet will be removed.__
+    * __one ACL can be assigned to multiple Subnets__.
+
+---
 
 ### Direct Connect
 * way to connet to AWS without public internet - uses direct fiber
