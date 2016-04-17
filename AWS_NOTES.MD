@@ -3,8 +3,40 @@
 ## AWS Developer Certified Associate
 
 ### VPC - Virtual private cloud
-* Virtual Data Center
-* 
+* Virtual Data Center in the cloud
+* Provides logically isolated section of AWS cloud services - virtual network enviroment with own ip address range/subnet/route tables/network gateways
+* easily configure the network - security groups and network ACLs can be used for access
+* hardware VPN can be created betyween company and AWS VPC - extension to corporate network (Amazon Direct COnnect)
+* What can be done with VPC
+    * launch EC2 under the virtual subnet
+    * assign custom ip in each subnet
+    * configure route tables b/w subnet
+    * creating internet gateways and attach/detach to subnets - to implement internet access less network (canot be accessed from public)
+    * more security in AWS resources 
+        * instance security group
+        * subnet network level ACLs.
+* Default VPC
+    * Default VPC is user friendly  - allows to immediately deploy instances
+    * al subnets in default VPC have internet gateway attached
+    * each Ec2 instance has public and private ip address
+    * deleting the default VPC is not advisable - have to contack amazon to get ot back.
+    
+* Custom VPC
+
+* VPC Peering
+    * allows to connect one VPC with another via direct network route using private address
+    * these behaves as similar to same private network
+    * can connect to VPCs in other AWS accounts
+    * peering is star configuration - each VPC can be peered with __4__ VPCs.
+* VPC Restrictions
+    * max of __5__ elastic addresses and __5__ internet gateways per VPC
+    * can have __5 VPCs__ per region - additional should be requested to AWS.
+    * __50 VPN Connection__ per region
+    * __50 customer gateways__  per region
+    * __200 route tables per region__.
+    * __ 100 security groups__ per VPC - __ 50 rules per security group__.
+    
+
 
 ### Direct Connect
 * way to connet to AWS without public internet - uses direct fiber
