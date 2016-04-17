@@ -4,6 +4,7 @@
 
 ### VPC - Virtual private cloud
 * Virtual Data Center
+* 
 
 ### Direct Connect
 * way to connet to AWS without public internet - uses direct fiber
@@ -118,6 +119,12 @@ Read more about http codes
 
 ### EBS - Elastic beans talk
 * to deploy apps developed in any language and docker too - nginx, apache, IIS ... supported
+ * Infrastructuer template specifically meant for application deployment and monitoring.
+* No need to pay for elastic beanstalk - but need to pay for the resources created using Elastic BEanstalk
+* Available PLatforms : Docker, Go, Java, Node, PHP, Python, Ruby, Tomcat, .NET
+* Beanstalk internally uses cloudformation.
+* cAN MAKE CHANGES TO ENVIRONMENT AND RESTART.
+
 
 
 ### Lamda
