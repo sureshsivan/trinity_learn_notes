@@ -587,6 +587,22 @@ Sample Message
 
 ### SWF - Simple Workflow Service
 * to design and execute workflows in the cloud(*like batches) - sequential or parallel
+* co ordinates work across distributed components
+* workflows can invoked by executable code/web service calls/script/human actions...
+* amazon.com uses SWF - for order workflow
+* SWF Workers : programs that interactt with SWF for receive tasks and process it  then return results
+* SWF Deciders : co ordibbates the tasks
+* SWF brokers interaction b/w workers and decidors - ensures task is assigned only once and not duplicated.
+    keeps track of task executions
+* Workers and decidors run independently and no need to keep track of tasks - SWF does the orchestration
+* SWF Domains : Domain isolate set of types executions and task list from others withing same account
+* Domains can be registered using __RegisterDomain__ action in SWF - parameters are specified as JSON.
+    one of the argument is "workflowExecutionRetentionPeriodInDays"
+* Message validity on SWF is __1 year__ and measured in seconds (__14 days in SQS - default is 4 days__)
+* SWF is task oriented API (SQS is message oriented)
+* SWF ensures task is assigned only once no duplication- in SQS it should be handled by consumer
+* SWF keeps track of all tasks - SQS should do it in program especially when multiple queues
+* diagram : http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-workflow-exec-lifecycle.html
 
 ### Code Commit
 * Source code maintenance and versioning system
@@ -640,4 +656,16 @@ B. DynamoDB uses optimistic concurrency control
 C. DynamoDB uses conditional writes for consistency
 D. DynamoDB restricts item access during reads
 E. DynamoDB restricts item access during writes
+```
+```code()
+Which of the following are elements in an Amazon Simple Workflow Service (SWF) workflow?
+Choose 3 answers
+A.Workflow activity
+B.Decider
+C.Activity worker
+D.Adapter
+E.Message port
+F.Workflow starter
+Answer: BCF
+
 ```
