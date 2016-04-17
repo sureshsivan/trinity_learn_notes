@@ -525,9 +525,42 @@ total cost is .025 + .2246 = .2496$/day
 * Cloud Service for send/receive email
 
 ### SNS - Simple Notification Service
-* 
+* Diagram : http://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html
+* Notofication service which uses pub-sub (publish-subscribe) model (push mechanism) - eliminates the need to periodic poll.
+* can push notification to mobile devices or as sms or email or to SQS or to any http endpoint.
+* all published messages are stored across multiple availability zones (it prevents messages to lost)
+* TOPIC:topic is an access points for subscription and the place to publish the mnessage
+* any no of subscribers and any type of subscribers (mobile push/sms/email) can subscribe to a topic - SNS delivers the message to different type os subscribers by firmatting it
+* price : 0.50$ per million SNS requests and 0.06$ per 100k deliveries over http, 0.75$ per 100 sms, 2.00$ per 100K email
+* __data types is JSON__
+* Subscription expires in 3 days if not confirmed
+* TTL - Time To Live in seconds - if undelivered - message will expire
+* Protocols : HTTP, HTTPS, email, EMail-JSON, SMS, SQS, Lambda, Application
+* MEssage can be customized for each protocol
+
+```json
+Sample Message
+{
+  "Type" : "Notification",
+  "MessageId" : "de400cf7-5127-5373-be49-437baa6d2824",
+  "TopicArn" : "arn:aws:sns:us-west-1:143095841095:testtopic",
+  "Subject" : "TEst Subject 1",
+  "Message" : "TEst Raw MEssage 1",
+  "Timestamp" : "2016-04-17T02:46:34.043Z",
+  "SignatureVersion" : "1",
+  "Signature" : "S/oQxfxugokT441MsQsCRSWQaI7XEw89WO81E3WEexjOr1ISSdm6CMUHNm5Jzqg1aqMMy41krZayv8iNLt2l+ULhFduAdF1JrhbKdchaTJFmdUy2DvCk5vbcst7TyNqGGDTuePtjKwl2OhwlxtIhaCIK7/ZN4BIRL2o5dU/kUMKj6YwG5B0or1RqVkO3ya/mz27EhJm5orKJfJ0dFdJ0QthNGj96Yj7t4WEoVAH7CVltquWk3BUA+5bhbgN8b/DX/s8tpzGC6obnZq7NQdso7xNEOX6VfV8sU8vCd8QktylZBr7//m1xuZYyAW2/AIjUNGi286e9M47MUdjTU4Q4Bg==",
+  "SigningCertURL" : "https://sns.us-west-1.amazonaws.com/SimpleNotificationService-bb750dd426d95ee9390147a5624348ee.pem",
+  "UnsubscribeURL" : "https://sns.us-west-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:us-west-1:143095841095:testtopic:68c0ff4c-e59e-413d-a919-cafe3055f2a8",
+  "MessageAttributes" : {
+    "AWS.SNS.MOBILE.MPNS.Type" : {"Type":"String","Value":"token"},
+    "AWS.SNS.MOBILE.MPNS.NotificationClass" : {"Type":"String","Value":"realtime"},
+    "AWS.SNS.MOBILE.WNS.Type" : {"Type":"String","Value":"wns/badge"}
+  }
+}
+```
 
 ### SQS - Simple Queue Service
+ * Diagram : http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/MessageLifecycle.html
 * decoupling infrastructure components of AWS - producer consumer pattern
 * The first service launched by AWS
 * Web service message Queue which can be used to store messages waiting for computers to process them - queue is a temporary repository for the messages waiting to be processed
@@ -539,9 +572,18 @@ total cost is .025 + .2246 = .2496$/day
 * messages are not pushed by queue - consumer has to __poll__.
 * Visibility timeout check happens only when message is polled
 * supports autoscaling - if queue capacity threshold reached (some %) - can spin up additional consumers and add to the queue.
-* default visibility timeout windows - 12 hr
+* __default visibility timeout is 30 seconds - maximum is - 12 hr__
+ * timeout can be changed (if 30 sec is not sufficient), by __ChangeVisibilityAction__ / __ChangeMEssageVisibility__ - then SQS restarts the timeout period with new value
 * single SQS request can have upto __10 message with maximum of 256 kb paylod__ - billed @ 64 kb chunk
     * one message which contains 8 messages and 256 KB in total size is billed as 4 requests.
+* load and priority is generally handled by creating multiple queues - with different no of consumers in those queues.
+* Traditional SQS polling returns with message immediately
+* __Long Polling__ can be used which would wait for a message to arrive in the queue and return or wait till the timeout and return no message
+* Max long poll timeout is 20 seconds - long poll saves some money by minimizing the requests.
+* SQS FAnning out
+    * passing one message to multiple queues
+    * create SNS topic and create multiple SQS Queues which subscribes to that SNS topic
+    * any message sent to SNS will published to all those queues
 
 ### SWF - Simple Workflow Service
 * to design and execute workflows in the cloud(*like batches) - sequential or parallel
@@ -587,5 +629,15 @@ total cost is .025 + .2246 = .2496$/day
  * Go through __FAQ__ section of each area targetted for the exam
 * Go through COde Commit, Code Deploy, Code Pipeline
 * If you want to enable a user to download your private data directly from S3, you can insert a pre-signed URL into a web page before giving it to your user. --> TRUE
+* Go through all the QA sections in the tutorial
 
 
+``` code()
+answer : B and C
+Which statements about DynamoDB are true? (Pick 2 correct answers)
+A. DynamoDB uses a pessimistic locking model
+B. DynamoDB uses optimistic concurrency control
+C. DynamoDB uses conditional writes for consistency
+D. DynamoDB restricts item access during reads
+E. DynamoDB restricts item access during writes
+```
