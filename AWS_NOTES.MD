@@ -484,7 +484,18 @@ total cost is .025 + .2246 = .2496$/day
 * Monitoring tool for AWS Environment  
 
 ### Cloud Formation
-* Script out infrastructure - datacenter can bve scripted
+* Script out infrastructure - datacenter can be scripted as templates (stack template)
+* Cloud Formation is free but resources created through cloud formation will be charged.
+* __CloudFOrmer__ helps to create stack template from existing cloud resource
+* stack template is written as JSON. - can be created using visual designer tool (editing an predefined template is possibel)
+* most used tags in JSON template : Parameters, Resources, Outputs
+* the values from the Parameters can be used in script as references - Ex : __{ "Ref" : "DBRootPassword" }, "'"]]}__
+* in output sections values of the machine attributes can be used  - such as public DNS name and etc
+    * { "Fn::Join" : ["", ["http://", { "Fn::GetAtt" : [ "WebServerInstance", "PublicDnsName" ]}]] }
+    * Utility functions are provided like __Fn::Join(similar to js join), Fn::GetAtt (get some attribute of a resource)__
+* By default - if there is an error during cloud formation script running (in any of the step) - the whole thing is reverted back.    
+
+
 
 ### Cloud Trail
 * Auditing for AWS Environment - all AWS events are logged
