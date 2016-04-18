@@ -537,7 +537,32 @@ total cost is .025 + .2246 = .2496$/day
 * It can be always re created for every IAM user.
 
 ---    
-        
+
+### Shared responsibility
+
+#### Shared responsibilityfor infra services (like EC2, EBS, VPC) 
+* This define what responsibility should b owned by AWS use and AWS service provider.
+* AWS resposible for
+    * Global infrastructure like regions/availability zones/edge locations and its physical security (no one can go inside facility exceptallowed users)
+    * Provides foundation services like EC2/storage/database/networkings - hypervisors and everything
+    * if there is any patch required in hypervisor - amazon will take care - once happened in 2014 - which required all AWS EC2 had to be restarted
+*  Customer responsible for
+    * encryption - network configuration
+    * operation system firewall - operating system configuration
+    
+#### Shared responsibility for container services (like RDS, EMR)
+    * No access to operating system - carnot do rdp or ssh
+    * Amazon will take care of patching the OS.
+    * customer has to do firewall configuration
+    
+#### Shared responsibilityfor abstracted services (like S3, dynamo DB, Lambda) 
+    * Amazon responsible for OS patchig the OS and infrastructure.
+    * user reponsible for client side encryption and data security.
+    * server side encryption provided - user has to useit. AWS will makage the keys
+
+---
+
+
 
 ### Directory Services
 
