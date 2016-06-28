@@ -1,4 +1,5 @@
-Check udemu video annotations too.
+* Check udemy video annotations too.
+* check for region places and its code
 
 ### S3
 ```sh
@@ -18,6 +19,7 @@ Check udemu video annotations too.
 * Glacier - Archival storage
   * 3-5 hrs to restore from glaciers
 * 1 byte to 5TB for a file - unlimited storage
-* https://s3-<region_code>.amazonaws.com/<bucket_name>
+* https://s3-<region_code>.amazonaws.com/<bucket_name> - buckets are universally global - should be unique.
 * read after write consistency for new objects - eventual consistency for overwrite and delete operations.
+* charged based on storage size, requests, data transfer
 ```
