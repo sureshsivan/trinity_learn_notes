@@ -12,14 +12,25 @@
   * for less frequent data access- lower than S3-99.99% but with freq based retrieval cost
   * very low retrieval time - fast
   * 99.9% availability 99.99999999999%(11 9's) durability
-  * Cn sustain 1 facility disasted.
+  * Cn sustain 1 facility disaster.
 * S3-RR TIER (Reduced Redundancy)
   * 99.99 % availability and 99.99% durability.
   * 99.99999999999%(11 9's) durability
 * Glacier - Archival storage
   * 3-5 hrs to restore from glaciers
+* storage tiers and encryptions (storage classes) can be applied @ individual object level - not necessarily need to be in bucket level.  
 * 1 byte to 5TB for a file - unlimited storage
 * https://s3-<region_code>.amazonaws.com/<bucket_name> - buckets are universally global - should be unique.
+* https://s3-<region_code>.amazonaws.com/<bucket_name>/<file_name>?versionId=<version_id>
 * read after write consistency for new objects - eventual consistency for overwrite and delete operations.
 * charged based on storage size, requests, data transfer
+* versioning must be enabled(in source and destination) for cross region replication
+* a role/policy is required for cross region replication.
+* Life cycle management
+ * atleast 30 days wait requiored for moving from "standard to IA" or "IA to glacier"
+ * file size must be atleast 128kb in size
+ * glacier charges based on 90 days period. so preferance to keep it for 90 days atleast.
+ * with verioning to delete a file permanently - do this
+  * expire the current ve - i.e - apply delete marker on current version
+  * then delete previous versions on file
 ```
