@@ -33,4 +33,22 @@
  * with verioning to delete a file permanently - do this
   * expire the current ve - i.e - apply delete marker on current version
   * then delete previous versions on file
+ * Event notifications help doing something in S3 events like put/delete/..
+  * can pass event to SNS, SQS, lamda (lamda is based on region support)
+* S3 security
+ * bucket policies - bucket level control
+ * Access Control Lists(ACLs) - provide item level access control inside a bucket
+ * Data transfer security
+  * uses https SSL/TLS
+ * At rest security
+  * Server Side Encryption - SSE
+   * SSE-S3 - S3 managed keys (AES256 - Advanced Encryption Standard)
+   * SSE-KMS - Amazon Key Management service
+   * SSE-C - Customer provided keys
+  * Client side encryption
+   * Encrypt the data in client side and upload it
+  
+```
+### cloud front
+```sh
 ```
