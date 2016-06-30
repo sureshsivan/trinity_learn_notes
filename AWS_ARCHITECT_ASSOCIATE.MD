@@ -36,6 +36,7 @@
  * Event notifications help doing something in S3 events like put/delete/..
   * can pass event to SNS, SQS, lamda (lamda is based on region support)
 * S3 security
+ * can turn on logging
  * bucket policies - bucket level control
  * Access Control Lists(ACLs) - provide item level access control inside a bucket
  * Data transfer security
